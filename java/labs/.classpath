@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/clr/.m2/repository/com/mysql/clusterj/clusterj-api/7.1.22-SNAPSHOT/clusterj-api-7.1.22-SNAPSHOT.jar"/>
+	<classpathentry kind="output" path="labs"/>
+</classpath>

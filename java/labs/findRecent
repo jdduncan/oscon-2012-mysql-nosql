@@ -1,0 +1,11 @@
+#!/bin/bash
+
+. ../../pathnames.sh
+
+export CLUSTERJ_JAR=$MYSQL_JAVA_SHARE/clusterj-7.2.6.jar
+export NDBCLIENT=$MYSQL_LIB_DIR
+
+java -cp ..:$CLUSTERJ_JAR -Djava.library.path=$NDBCLIENT \
+ -Djava.util.logging.config.file=logging.properties \
+ labs.test.Find --recent 10
+
