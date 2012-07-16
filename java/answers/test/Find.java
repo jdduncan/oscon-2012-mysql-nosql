@@ -139,7 +139,36 @@ public class Find {
             queryTweets.setParameter("range_high", highDate);
         }
 
-
+        if (queryHashtags != null) {
+//            if (skip != null || limit != null) {
+//                queryHashtags.setLimits(skipValue, limitValue);
+//            }
+            List<Hashtags> results = queryHashtags.getResultList();
+            Map<String, Object> explain = queryHashtags.explain();
+            System.out.println("Hashtags scan type: " + explain.get(Query.SCAN_TYPE) + " Index: " + explain.get(Query.INDEX_USED));
+            for (Hashtags result: results) {
+                String tweet_id = result.getTweet_id();
+                Tweets tweet = session.find(Tweets.class, tweet_id);
+                System.out.println("Hashtag: " + result.getHashtag()
+                        + " author: " + result.getAuthor()
+                        + " tweet_id: " + result.getTweet_id()
+                        + " tweet: " + tweet.getTweet()
+                        );
+            }
+        } else if (queryTweets != null) {
+//            if (skip != null || limit != null) {
+//                queryTweets.setLimits(skipValue, limitValue);
+//            }
+            List<Tweets> results = queryTweets.getResultList();
+            Map<String, Object> explain = queryTweets.explain();
+            System.out.println("Tweets scan type: " + explain.get(Query.SCAN_TYPE) + " Index: " + explain.get(Query.INDEX_USED));
+            for (Tweets result: results) {
+                System.out.println("Tweet id: " + result.getId()
+                        + " author: " + result.getAuthor()
+                        + " time_stamp: " + result.getTime_stamp()
+                        + " tweet: " + result.getTweet());
+            }
+        }
         session.close();
         sessionFactory.close();
     }
