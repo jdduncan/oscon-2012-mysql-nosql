@@ -31,9 +31,14 @@ sub insert_tweet {
   # Insert the tweet 
   my $key = "tweet:$id";
   my $value = "$time" . "\t" . $author . "\t" . $tweet;
-
   $mc->add($key, $value);
 
+  # Insert the author record if there is none.
+  $mc->add("newauthor:".$author, 0);
+  
+  # Then increment the author's tweet count.
+  $mc->incr("tweetcount:".$author, 1);
+  
   # Split the tweet based on words.
   # Then, for each word that begins with "#", create a hashtag record.
   foreach $word (split(' ', $tweet)) {
